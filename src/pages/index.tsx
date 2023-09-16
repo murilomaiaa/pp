@@ -1,13 +1,18 @@
 import Head from 'next/head'
-import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
-import { ExerciseListItem } from '@/components/ExerciseList/ExerciseListItem/ExerciseListItem'
-import { AddSetModal } from '@/components/Modal/AddSetModal'
-import { useExercises } from '@/hooks/api/useExercises'
-import { ExerciseSet } from '@/types/ExerciseSet'
+import {
+  Button,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+} from '@chakra-ui/react'
+import { CustomerListItem } from '@/components/ExerciseList/ExerciseListItem/ExerciseListItem'
 import { useRouter } from 'next/router'
+import { useCustomers } from '@/hooks/useCustomers'
 
 export default function Home() {
-  const { data, isLoading, error, refetch } = useExercises()
+  const { customers } = useCustomers()
 
   const router = useRouter()
 
@@ -29,29 +34,21 @@ export default function Home() {
         minHeight="100vh"
       >
         <Heading as="h1">Clientes</Heading>
-        <Grid
-          templateAreas={`"list-item list-item list-item"
-          ". . button"
-          `}
-          templateColumns="1fr 1fr"
-          justifyContent="space-between"
-        >
-          <GridItem area="list-item">
-            <Flex>
-              {data?.exercises.map((exercise: any) =>(
-                <ExerciseListItem
-                key={exercise.id}
-                name={exercise.name}
-                sets={exercise.sets}
-                restTimeInSeconds={exercise.restTimeInSeconds}
-                />
-                ))}
-            </Flex>
-          </GridItem>
-          <GridItem area="button" display="flex" justifyContent="flex-end">
-            <Button size="sm" variant="solid" colorScheme="green" onClick={() => router.push('/new')}>Adicionar</Button>
-          </GridItem>
-        </Grid>
+        <Flex width="100%" flexDirection="row-reverse">
+          <Button
+            size="sm"
+            variant="solid"
+            colorScheme="green"
+            onClick={() => router.push('/new')}
+          >
+            Adicionar
+          </Button>
+        </Flex>
+        <Flex flexDirection="column" gap={2}>
+          {Object.values(customers).map((customer) => (
+            <CustomerListItem key={customer.id} customer={customer} />
+          ))}
+        </Flex>
       </Container>
     </>
   )

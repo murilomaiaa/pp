@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ExerciseListItem } from './ExerciseListItem';
+import { CustomerListItem } from './ExerciseListItem';
 import { AppProvider } from '@/hooks/AppProvider';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Components/ExerciseList/ExerciseListItem',
-  component: ExerciseListItem,
+  component: CustomerListItem,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
@@ -17,7 +17,7 @@ const meta = {
   // argTypes: {
   //   backgroundColor: { control: 'color' },
   // },
-} satisfies Meta<typeof ExerciseListItem>;
+} satisfies Meta<typeof CustomerListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

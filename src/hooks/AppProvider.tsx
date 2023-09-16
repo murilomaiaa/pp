@@ -6,12 +6,12 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 
-export const AppProvider = ({children} :PropsWithChildren) => <>
-  <QueryClientProvider client={queryClient}>
-    <CacheProvider>
-      <ChakraProvider>
-        {children}
-      </ChakraProvider>
-    </CacheProvider>
-  </QueryClientProvider>
-</>
+export const AppProvider = ({ children }: PropsWithChildren) => (
+  <>
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider>
+        <ChakraProvider>{children}</ChakraProvider>
+      </CacheProvider>
+    </QueryClientProvider>
+  </>
+)

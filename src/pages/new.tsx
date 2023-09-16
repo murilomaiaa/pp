@@ -1,3 +1,4 @@
+import { useCustomers } from '@/hooks/useCustomers'
 import {
   Button,
   Container,
@@ -7,10 +8,12 @@ import {
   Heading,
   Input,
   Select,
+  SimpleGrid,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-type CustomerData = {
+type CustomerDataForm = {
   name: string
   weightInKg: number
   heightInCm: number
@@ -23,11 +26,19 @@ export default function New() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CustomerData>()
+  } = useForm<CustomerDataForm>()
 
-  const onSubmit: SubmitHandler<CustomerData> = (data) => {
+  const router = useRouter()
+
+  const { addCustomer } = useCustomers()
+
+  const onSubmit: SubmitHandler<CustomerDataForm> = (data) => {
     // request api and redirect
-    console.log(data)
+    addCustomer({
+      id: Date.now().toString(),
+      ...data,
+    })
+    router.push('/')
   }
 
   return (
@@ -43,38 +54,56 @@ export default function New() {
       <Heading as="h1">Novo aluno</Heading>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Flex gap={4}>
+        <SimpleGrid columns={[1, null, 2]} gap={4} marginBottom={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Nome</FormLabel>
-            <Input {...register('name')} />
+            <Input {...register('name', { required: true })} id="name" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel htmlFor="sex">Sexo</FormLabel>
-            <Select {...register('sex')}>
+            <Select
+              placeholder="Selecione um sexo"
+              {...register('sex', { required: true })}
+              id="sex"
+            >
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
             </Select>
           </FormControl>
           <FormControl isRequired>
             <FormLabel htmlFor="goal">Objetivo</FormLabel>
-            <Select {...register('goal')}>
+            <Select
+              placeholder="Selecione um objetivo"
+              {...register('goal', { required: true })}
+              id="goal"
+            >
               <option value="hypertrophy">Hipertrofia</option>
               <option value="fat-loss">Perca peso</option>
             </Select>
           </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="weightInKg">Peso (kg)</FormLabel>
-            <Input {...register('weightInKg', { valueAsNumber: true })} />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="heightInCm">Altura (cm)</FormLabel>
-            <Input {...register('heightInCm', { valueAsNumber: true })} />
-          </FormControl>
-          <Flex width="100%" flexDirection="row-reverse">
-            <Button colorScheme="green" type="submit">
-              Salvar
-            </Button>
-          </Flex>
+          <SimpleGrid columns={[1, null, 2]} gap={4}>
+            <FormControl isRequired>
+              <FormLabel htmlFor="weightInKg">Peso (kg)</FormLabel>
+              <Input
+                {...register('weightInKg', {
+                  pattern: /^[0-9]+$/,
+                })}
+                id="weightInKg"
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="heightInCm">Altura (cm)</FormLabel>
+              <Input
+                {...register('heightInCm', { valueAsNumber: true })}
+                id="heightInCm"
+              />
+            </FormControl>
+          </SimpleGrid>
+        </SimpleGrid>
+        <Flex width="100%" flexDirection="row-reverse">
+          <Button colorScheme="green" type="submit">
+            Salvar
+          </Button>
         </Flex>
       </form>
     </Container>
