@@ -1,13 +1,6 @@
 import Head from 'next/head'
-import {
-  Button,
-  Container,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-} from '@chakra-ui/react'
-import { CustomerListItem } from '@/components/ExerciseList/ExerciseListItem/ExerciseListItem'
+import { Button, Container, Flex, Heading } from '@chakra-ui/react'
+import { CustomerListItem } from '@/components/ExerciseList/ExerciseListItem/CustomerListItem'
 import { useRouter } from 'next/router'
 import { useCustomers } from '@/hooks/useCustomers'
 
