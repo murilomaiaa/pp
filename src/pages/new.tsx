@@ -22,11 +22,7 @@ type CustomerDataForm = {
 }
 
 export default function New() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CustomerDataForm>()
+  const { register, handleSubmit } = useForm<CustomerDataForm>()
 
   const router = useRouter()
 
