@@ -19,7 +19,7 @@ export const CustomerListItem = ({ customer }: CustomerListItemProps) => {
     >
       <Flex gap="0.5em">
         <Link href={`/aluno/${customer.id}`}>
-        <Text fontWeight="bold">{customer.name}</Text>
+          <Text fontWeight="bold">{customer.name}</Text>
         </Link>
       </Flex>
     </Box>
