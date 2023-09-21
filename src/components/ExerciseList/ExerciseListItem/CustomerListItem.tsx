@@ -1,5 +1,6 @@
 import { CustomerData } from '@/hooks/useCustomers'
 import { Box, Flex, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 
 export type CustomerListItemProps = {
   customer: CustomerData
@@ -17,7 +18,9 @@ export const CustomerListItem = ({ customer }: CustomerListItemProps) => {
       width="100%"
     >
       <Flex gap="0.5em">
+        <Link href={`/aluno/${customer.id}`}>
         <Text fontWeight="bold">{customer.name}</Text>
+        </Link>
       </Flex>
     </Box>
   )

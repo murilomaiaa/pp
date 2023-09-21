@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-title-in-document-head */
+import Header from '@/components/Navbar'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {

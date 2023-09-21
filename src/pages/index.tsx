@@ -3,6 +3,7 @@ import { Button, Container, Flex, Heading } from '@chakra-ui/react'
 import { CustomerListItem } from '@/components/ExerciseList/ExerciseListItem/CustomerListItem'
 import { useRouter } from 'next/router'
 import { useCustomers } from '@/hooks/useCustomers'
+import Header from '@/components/Navbar'
 
 export default function Home() {
   const { customers } = useCustomers()
@@ -17,6 +18,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Header />
       <Container
         centerContent={false}
         maxWidth="880px"

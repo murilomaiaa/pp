@@ -1,3 +1,4 @@
+import Header from '@/components/Navbar'
 import { useCustomers } from '@/hooks/useCustomers'
 import {
   Button,
@@ -38,6 +39,8 @@ export default function New() {
   }
 
   return (
+    <>
+    <Header />
     <Container
       centerContent={false}
       maxWidth="880px"
@@ -103,5 +106,6 @@ export default function New() {
         </Flex>
       </form>
     </Container>
+    </>
   )
 }
