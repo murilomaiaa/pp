@@ -17,7 +17,7 @@ type CustomerDataForm = {
   name: string
   weightInKg: number
   heightInCm: number
-  goal: 'hypertrophy' | 'fat-loss'
+  goal: 'Hipertrofia' | 'Emagrecimento'
   sex: 'M' | 'F'
 }
 
@@ -29,12 +29,12 @@ export default function New() {
   const { addCustomer } = useCustomers()
 
   const onSubmit: SubmitHandler<CustomerDataForm> = (data) => {
-    // request api and redirect
+    const id = Date.now().toString()
     addCustomer({
-      id: Date.now().toString(),
+      id,
       ...data,
     })
-    router.push('/')
+    router.push(`/aluno/${id}`)
   }
 
   return (
@@ -73,8 +73,8 @@ export default function New() {
               {...register('goal', { required: true })}
               id="goal"
             >
-              <option value="hypertrophy">Hipertrofia</option>
-              <option value="fat-loss">Perca peso</option>
+              <option value="Hipertrofia">Hipertrofia</option>
+              <option value="Emagrecimento">Perca peso</option>
             </Select>
           </FormControl>
           <SimpleGrid columns={[1, null, 2]} gap={4}>
